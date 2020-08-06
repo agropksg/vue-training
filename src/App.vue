@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Todos v-bind:todos="todos" />
-    <AddTodo v-on:add-todo="addTodo" /> 
+    <Todos :todos="todos" />
+    <AddTodo @addTodo="addTodo" /> 
   </div>
 </template>
 
@@ -37,12 +37,10 @@ export default {
   },
   methods: {
     addTodo(newTodoObj) {
-      this.todos = [this.todos, newTodoObj];
+      this.todos.push(newTodoObj);
     }
   }
 }
 </script>
 
-<style>
-
-</style>
+<style></style>
