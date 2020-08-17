@@ -1,28 +1,16 @@
 <template>
-	<div>
-		<h2>My todolist</h2>
-		<ul>
-			<li v-bind:key="todo.id" v-for="todo in todos">
-				<Todo v-bind:todo="todo" />
-			</li>
-		</ul>
-	</div>
-</template>
-
+  <div class="todos">
+    <Todo v-for="item in items" v-bind:key="item.id" v-bind:item="item" />
+  </div>
+</template>>
 <script>
-	import Todo from './Todo';
+import Todo from './Todo';
 
-	export default{
-		name:'Todos',
-		components:{
-			Todo
-		},
-		props:[
-			'todos'
-		]
-	}
+export default {
+  name:"todos",
+  props:['items'],
+  components:{
+    Todo
+  }
+}
 </script>
-
-<style scoped>
-	
-</style>

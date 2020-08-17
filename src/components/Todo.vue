@@ -1,16 +1,22 @@
 <template>
-	<div>{{ todo.title }}</div>
+  <div class="todo-item" v-if="item.status">
+    {{ item.id }} ) {{ item.name }} <RemoveBtn @remove-item="removeItem" />
+  </div>
 </template>
 
 <script>
-	export default{
-		name:'Todo',
-		props:[
-			'todo'
-		]
-	}
-</script>
+import RemoveBtn from './RemoveBtn';
 
-<style scoped>
-	
-</style>
+export default {
+  name: 'todo',
+  props:['item'],
+  components:{
+    RemoveBtn
+  },
+  methods:{
+    removeItem(){
+      this.item.status = false;
+    }
+  }
+}
+</script>>
