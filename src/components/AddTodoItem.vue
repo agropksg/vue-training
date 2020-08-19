@@ -1,5 +1,5 @@
 <template>
-  <form @submit="addFunc">
+  <form @submit.prevent="addFunc">
     <input type="text" v-model="title" name="title">
     <button type="submit">Отправить</button>
   </form>
@@ -17,8 +17,7 @@ export default {
     }
   },
   methods:{
-    addFunc(event){
-      event.preventDefault();
+    addFunc(){
       const NewTodoObject = {
         id: uuidv4(),
         name:this.title,

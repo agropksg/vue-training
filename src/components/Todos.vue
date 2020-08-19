@@ -1,8 +1,8 @@
 <template>
   <div class="todos">
-    <Todo v-for="item in items" v-bind:key="item.id" v-bind:item="item" />
+    <Todo v-for="item in items" :key="item.id" :item="item" />
   </div>
-</template>>
+</template>
 <script>
 import Todo from './Todo';
 

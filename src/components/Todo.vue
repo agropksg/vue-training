@@ -1,6 +1,6 @@
 <template>
   <div class="todo-item" v-if="item.status">
-    {{ item.id }} ) {{ item.name }} <RemoveBtn @remove-item="removeItem" />
+    {{ `${item.id}) ${item.name}` }} <RemoveBtn @remove-item="removeItem" />
   </div>
 </template>
 
@@ -19,4 +19,4 @@ export default {
     }
   }
 }
-</script>>
+</script>

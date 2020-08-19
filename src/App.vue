@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Todos v-bind:items = 'list' />
+    <Todos :items = 'list' />
     <AddTodoItem @add-func="addToList" />
   </div>
 </template>
