@@ -19,12 +19,12 @@ import AddTodoItem from './components/AddTodoItem';
           {
             id:2,
             name:'Nashaniva',
-            status:true
+            status:false
           },
           {
             id:4,
             name:'tut.by',
-            status:true
+            status:false
           },
           {
             id:3,

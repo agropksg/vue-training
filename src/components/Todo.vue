@@ -1,22 +1,28 @@
 <template>
-  <div class="todo-item" v-if="item.status">
-    {{ `${item.id}) ${item.name}` }} <RemoveBtn @remove-item="removeItem" />
+  <div class="todo-item"  :class="{'completed':item.status}">
+     {{ `${order+1} ${item.name}` }}  <CompleteBtn @complteItem="completedItem" />
   </div>
 </template>
 
 <script>
-import RemoveBtn from './RemoveBtn';
+import CompleteBtn from './CompleteBtn';
 
 export default {
   name: 'todo',
-  props:['item'],
+  props:['item','order'],
   components:{
-    RemoveBtn
+    CompleteBtn
   },
   methods:{
-    removeItem(){
-      this.item.status = false;
+    completedItem(){
+      this.item.status = true;
     }
   }
 }
 </script>
+
+<style scoped>
+  .completed{
+    text-decoration: line-through  ;
+  }
+</style>
