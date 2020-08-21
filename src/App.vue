@@ -1,26 +1,20 @@
 <template>
   <div id="app">
-    <Navbar />
+    <Counter />
+    <AddCounter />
+    <RemoveCounter />
   </div>
 </template>
 
 <script>
+import Counter from './components/Counter';
+import AddCounter from './components/AddCounter';
+import RemoveCounter from './components/RemoveCounter';
 
-import Navbar from './components/Navbar';
-
-
-  export default {
-    name: 'app',
-    components:{
-      Navbar
-    },
-    data(){
-      return {
-      }
-    },
-    methods:{
-    }  
+export default {
+  name: 'App',
+  components:{
+    Counter, AddCounter, RemoveCounter
   }
+}
 </script>
-
-<style></style>
