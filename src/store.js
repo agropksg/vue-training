@@ -5,22 +5,32 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    count: 0
+    listToDo:[
+      {
+        id:1,
+        name:'Wake up',
+        complite:true
+      },
+      {
+        id:2,
+        name:'Wash face',
+        complite:false
+      },
+      {
+        id:3,
+        name:'Have breakfast',
+        complite:false
+      },
+    ]
   },
   mutations: {
-    increace(state,payload){
-      return state.count +=payload.amount;
-    },
-    decrease(state, payload){
-      return state.count -= payload.count;
+    addItem(state,payload){
+      return  state.listToDo.push(payload.amount);
     }
   },
   actions: {
-    increament(context, payload){
-      context.commit('increace',payload);
-    },
-    descreament(context, payload){
-       context.commit('decrease', payload); 
+    add_item(context, payload){
+      context.commit('addItem', payload);
     }
   }
 });
