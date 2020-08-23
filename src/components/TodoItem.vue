@@ -1,5 +1,5 @@
 <template>
-  <div class="todo-item" :class="{completed:item.complite}">{{item.name}} <ActualizationBtn :item_id='item.id' /></div>
+  <div class="todo-item" :class="{completed:item.complite}">{{item.name}} <ActualizationBtn :item='item' /></div>
 </template>
 
 <script>

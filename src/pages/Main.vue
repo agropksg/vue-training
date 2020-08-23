@@ -10,13 +10,15 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 import TodoItem from '../components/TodoItem.vue';
 
 export default {
-  computed: mapState({
-    items: state => state.listToDo
-  }),
+  computed:{
+    ...mapGetters({
+      items: 'getAllTodoItems'
+    })
+  },
   components:{
     TodoItem
   }

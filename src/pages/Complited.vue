@@ -8,21 +8,14 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import TodoItem from '../components/TodoItem.vue';
 
 export default {
-  computed: mapState({
-    items: function(state){
-      let items = [];
-      for(let i=0; i<state.listToDo.length; i++){
-        if(state.listToDo[i].complite){
-          items.push(state.listToDo[i]);
-        }
-      } 
-      return items;
+  computed:{
+    items(){
+      return this.$store.getters.getTodoItemsByCompliteStatus(true)
     }
-  }),
+  },
   components:{
     TodoItem
   }

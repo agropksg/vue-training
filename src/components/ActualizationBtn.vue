@@ -1,35 +1,28 @@
 <template>
   <div class="actualization-btn">
     <div v-if="item.complite">
-      <button class="actualize" @click="changeItemStatus()">Again</button>
+      <button class="actualize" @click="changeItemStatus(item.id)">Again</button>
     </div>
     <div v-else>
-      <button class="deactualize" @click="changeItemStatus()">Complite</button>
+      <button class="deactualize" @click="changeItemStatus(item.id)">Complite</button>
     </div>
     
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
 
 export default {
   name: 'ActualizationBtn',
-  props: ['item_id'],
+  props: ['item'],
   methods: {
     changeItemStatus(){
-      this.item.complite = !this.item.complite;
+      this.$store.dispatch({
+        type: 'changeItemStatus',
+        itemId: this.item.id
+      });
     }
   },
-  computed: mapState({
-    item: function(state){
-      for(let i=0; i<state.listToDo.length; i++){
-        if(state.listToDo[i].id == this.item_id){
-          return state.listToDo[i];
-        }
-      } 
-    }
-  })
 }
 </script>
 
