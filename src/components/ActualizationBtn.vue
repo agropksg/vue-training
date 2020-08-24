@@ -14,7 +14,14 @@
 
 export default {
   name: 'ActualizationBtn',
-  props: ['item'],
+
+  props: {
+    item:{
+      type: Object,
+      require: true
+    }
+  },
+  
   methods: {
     changeItemStatus(){
       this.$store.dispatch({

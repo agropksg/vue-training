@@ -1,16 +1,25 @@
 <template>
-  <div class="todo-item" :class="{completed:item.complite}">{{item.name}} <ActualizationBtn :item='item' /></div>
+  <div class="todo-item" 
+    :class="{completed:item.complite}">
+    {{item.name}}
+    <ActualizationBtn :item="item" />
+  </div>
 </template>
 
 <script>
 import ActualizationBtn from './ActualizationBtn.vue';
 
-
 export default {
   name: 'TodoItem',
-  props: ['item'],
+
   components: {
     ActualizationBtn
+  },
+
+  props: {
+    item: {
+      type: Object
+    }
   }
 }
 </script>

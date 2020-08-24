@@ -23,17 +23,17 @@ const store = new Vuex.Store({
       },
     ]
   },
+
   mutations: {
     addItem(state,payload){
-      return  state.listToDo.push(payload.amount);
+      state.listToDo.push(payload.amount);
     },
     changeItemStatus(state,payload){
-      let itemForChange = state.listToDo.filter(function(item){
-        return (payload.itemId === item.id);
-      });
-      return itemForChange[0].complite= !itemForChange[0].complite
+      let itemForChange = state.listToDo.find((item)=>payload.itemId === item.id)
+      itemForChange.complite = !itemForChange.complite
     }
   },
+
   actions: {
     add_item(context, payload){
       context.commit('addItem', payload);
@@ -42,16 +42,10 @@ const store = new Vuex.Store({
       context.commit('changeItemStatus',payload);
     }
   },
+  
   getters:{
-    getAllTodoItems:state=>{
-      return state.listToDo;
-    },
-    getTodoItemsByCompliteStatus: state=>compileStatus=>{
-      let resultArr = state.listToDo.filter(function(item){
-        return (item.complite === compileStatus)
-      });
-      return resultArr;
-    }
+    getAllTodoItems:state=>state.listToDo,
+    getTodoItemsByCompliteStatus: state=>compileStatus=>state.listToDo.filter(item=>item.complite == compileStatus)
   }
 });
 

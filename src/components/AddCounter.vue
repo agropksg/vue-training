@@ -1,6 +1,6 @@
 <template>
   <div class="add-counter">
-    <button v-on:click = 'addCounter()'>Add</button>
+    <button v-on:click="addCounter()">Add</button>
   </div>
 </template>
 
@@ -8,11 +8,11 @@
 import store from '../store.js';
 
 export default {
-  methods:{
+  methods: {
     addCounter(){
       store.dispatch({
         type: 'increament',
-        amount:20
+        amount: 20
       });
       
     }

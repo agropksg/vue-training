@@ -2,7 +2,10 @@
   <div class="actual">
     <h2>Actual</h2>
     <ul>
-      <li v-for="(item, index) in items" :key='index'><TodoItem :item='item' /></li>
+      <li v-for="(item, index) in items" 
+        :key='index'>
+        <TodoItem :item='item' />
+      </li>
     </ul>
   </div>
 </template>
@@ -11,7 +14,7 @@
 import TodoItem from '../components/TodoItem.vue';
 
 export default {
-  computed:{
+  computed: {
     items(){
       return this.$store.getters.getTodoItemsByCompliteStatus(false)
     }
