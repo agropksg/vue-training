@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import axios from 'axios';
+
 
 Vue.use(Vuex);
 
@@ -21,7 +23,11 @@ const store = new Vuex.Store({
         name:'Have breakfast',
         complite:false
       },
-    ]
+    ],
+    filterUniversity: {
+      city: []
+    },
+    universities:{}
   },
 
   mutations: {
@@ -31,6 +37,33 @@ const store = new Vuex.Store({
     changeItemStatus(state,payload){
       let itemForChange = state.listToDo.find((item)=>payload.itemId === item.id)
       itemForChange.complite = !itemForChange.complite
+    },
+    uploadUniversities(state,payload){
+      if(payload){
+        state.filterUniversity.city = payload.filterData.city;
+      }
+      
+      let request = 'https://myuniver.org/api/universities?';
+      let getParametrs ='';
+      let cities = state.filterUniversity.city;
+      if(cities && cities.length){
+        cities.forEach(item=>{
+          getParametrs+='&by_city='+item;
+        })          
+      }
+      if(getParametrs.length > 0){
+        getParametrs=getParametrs.slice(1);
+      }
+      // state.universities = getParametrs;
+      request+=getParametrs;
+      axios.get(request)
+      .then(response => {
+        console.log(response);
+        state.universities = response.data.universities;
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
     }
   },
 
@@ -40,12 +73,19 @@ const store = new Vuex.Store({
     },
     changeItemStatus(context,payload){
       context.commit('changeItemStatus',payload);
+    },
+    updateUniverstyResult(context, payload){
+      context.commit('uploadUniversities', payload);
+    },
+    updateUniversities(context){
+      context.commit('uploadUniversities');
     }
   },
   
   getters:{
     getAllTodoItems:state=>state.listToDo,
-    getTodoItemsByCompliteStatus: state=>compileStatus=>state.listToDo.filter(item=>item.complite == compileStatus)
+    getTodoItemsByCompliteStatus: state=>compileStatus=>state.listToDo.filter(item=>item.complite == compileStatus),
+    getUniversitiesUseFilter: state=>state.universities
   }
 });
 

@@ -1,29 +1,18 @@
 <template>
   <div id="app">
     <NavBar />
-    <router-view></router-view>
-    <AddTodoItem @addItem="addTodoItem" />
+    <router-view></router-view>    
   </div>
 </template>
 
 <script>
 import NavBar from './components/NavBar.vue';
-import AddTodoItem from './components/AddTodoItem.vue';
-import store from './store.js'
 
 export default {
   name: 'App',
   components:{
-    NavBar, AddTodoItem
+    NavBar
   },
-  methods:{
-    addTodoItem(obj){
-      store.dispatch({
-        type: 'add_item',
-        amount: obj
-      });
-    }
-  }
 }
 </script>
 
