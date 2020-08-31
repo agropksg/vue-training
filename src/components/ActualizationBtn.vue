@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 
 export default {
   name: 'ActualizationBtn',
@@ -24,11 +25,11 @@ export default {
   
   methods: {
     changeItemStatus(){
-      this.$store.dispatch({
-        type: 'changeItemStatus',
-        itemId: this.item.id
-      });
-    }
+      this.changeItemStatus(this.item.id);
+    },
+    ...mapActions([
+      'changeItemStatus'
+    ])
   },
 }
 </script>

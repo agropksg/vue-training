@@ -9,7 +9,7 @@
 <script>
 import NavBar from './components/NavBar.vue';
 import AddTodoItem from './components/AddTodoItem.vue';
-import store from './store.js'
+import { mapActions } from 'vuex';
 
 export default {
   name: 'App',
@@ -18,11 +18,11 @@ export default {
   },
   methods:{
     addTodoItem(obj){
-      store.dispatch({
-        type: 'add_item',
-        amount: obj
-      });
-    }
+      this.add_item(obj)
+    },
+    ...mapActions([
+      'add_item'
+      ])
   }
 }
 </script>
