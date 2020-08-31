@@ -48,7 +48,7 @@ const store = new Vuex.Store({
       let cities = state.filterUniversity.city;
       if(cities && cities.length){
         cities.forEach(item=>{
-          getParametrs+='&by_city='+item;
+          getParametrs+='&by_city[]='+item;
         })          
       }
       if(getParametrs.length > 0){
@@ -58,7 +58,6 @@ const store = new Vuex.Store({
       request+=getParametrs;
       axios.get(request)
       .then(response => {
-        console.log(response);
         state.universities = response.data.universities;
       })
       .catch(e => {
