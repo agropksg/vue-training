@@ -71,7 +71,6 @@ const store = new Vuex.Store({
       if(getParametrs.length > 0){
         getParametrs = getParametrs.slice(1);
       }
-      console.log(getParametrs);
       let request = 'https://myuniver.org/api/universities?';
 
       request += getParametrs;
