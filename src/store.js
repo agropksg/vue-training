@@ -25,66 +25,76 @@ const store = new Vuex.Store({
       },
     ],
     filterUniversity: {
-      city: []
+      city: [],
+      level: [],
     },
-    universities:{}
+    universities:{},
   },
 
   mutations: {
-    addItem(state,payload){
+    ADD_ITEM(state,payload){
       state.listToDo.push(payload);
     },
-    changeItemStatus(state,payload){
+    CHANGE_ITEM_STATUS(state,payload){
       let itemForChange = state.listToDo.find((item)=>payload === item.id)
       itemForChange.complite = !itemForChange.complite
     },
-    uploadUniversities(state,payload){
-      if(payload){
-        state.filterUniversity.city = payload.filterData.city;
-      }
-      
-      let request = 'https://myuniver.org/api/universities?';
-      let getParametrs ='';
-      let cities = state.filterUniversity.city;
-      if(cities && cities.length){
-        cities.forEach(item=>{
-          getParametrs+='&by_city[]='+item;
-        })          
-      }
-      if(getParametrs.length > 0){
-        getParametrs=getParametrs.slice(1);
-      }
-      // state.universities = getParametrs;
-      request+=getParametrs;
-      axios.get(request)
-      .then(response => {
-        state.universities = response.data.universities;
-      })
-      .catch(e => {
-        this.errors.push(e)
-      })
+    CHANGE_UNIVERSITIES_SET(state,payload){
+      state.universities = payload;
+    },
+    CHANGE_UNIVERSITIES_FILTER(state, payload){
+      state.filterUniversity = payload;
     }
   },
 
   actions: {
     add_item(context, payload){      
-      context.commit('addItem', payload);
+      context.commit('ADD_ITEM', payload);
     },
     changeItemStatus(context,payload){
-      context.commit('changeItemStatus',payload);
+      context.commit('CHANGE_ITEM_STATUS',payload);
     },
-    updateUniverstyResult(context, payload){
-      context.commit('uploadUniversities', payload);
+    uploadUniversities(context){
+      /// Получаем значения текущие значения фильтров и строим на основании их запрос
+      let university_filters = this.getters.getUniversityFilters;
+      let getParametrs = '';
+      if(university_filters.city.length){
+        university_filters.city.forEach(item => {
+          getParametrs += '&by_city[]='+item;
+        })
+      }
+      if(university_filters.level.length){
+        university_filters.level.forEach(item => {
+          getParametrs += '&by_level[]='+item;
+        })
+      }
+      if(getParametrs.length > 0){
+        getParametrs = getParametrs.slice(1);
+      }
+      console.log(getParametrs);
+      let request = 'https://myuniver.org/api/universities?';
+
+      request += getParametrs;
+      axios.get(request)
+      .then(response => {
+        /// Обновляем коллекцию доступных университетов
+        context.commit('CHANGE_UNIVERSITIES_SET', response.data.universities)
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
     },
-    updateUniversities(context){
-      context.commit('uploadUniversities');
-    }
+    updateUniversityFilter(context, payload){
+      context.commit('CHANGE_UNIVERSITIES_FILTER', payload);
+      context.dispatch('uploadUniversities');
+    },
   },
   
   getters:{
-    getAllTodoItems:state=>state.listToDo,
-    getTodoItemsByCompliteStatus: state=>compileStatus=>state.listToDo.filter(item=>item.complite == compileStatus),
-    getUniversitiesUseFilter: state=>state.universities
+    getAllTodoItems:state => state.listToDo,
+    getTodoItemsByCompliteStatus: state => compileStatus => state.listToDo.filter(item => item.complite == compileStatus),
+    getUniversities: state => state.universities,
+    getUniversityFilters: state => state.filterUniversity,
   }
 });
 

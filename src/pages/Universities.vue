@@ -16,21 +16,23 @@
 <script>
 import UniversityFilter from '../components/UnivertsityFilter.vue';
 import SingleUniversity from '../components/SingleUniversity.vue';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: "Universities",
   computed:{
-    universities(){
-      return this.$store.getters.getUniversitiesUseFilter;
-    }
+    ...mapGetters({
+      universities: 'getUniversities'
+    })
   },
   components: {
     UniversityFilter, SingleUniversity
   },
+  methods: {
+    ...mapActions(['uploadUniversities'])
+  },
   mounted: function(){
-    this.$store.dispatch({
-      type: "updateUniversities"
-    });
+    this.uploadUniversities();
   }
 }
 </script>
