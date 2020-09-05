@@ -3,9 +3,9 @@
     <router-link to="/">Main</router-link>
     <router-link to="/completed">Completed</router-link>
     <router-link to="/actual">Actual</router-link>
+    <router-link to="/universities">Universities</router-link>
   </div>
 </template>
-
 <style>
   .nav-bar{
     display: flex;

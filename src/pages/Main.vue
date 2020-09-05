@@ -6,13 +6,15 @@
         :key='index'>
         <TodoItem :item='item' />
       </li>
-    </ul>    
-  </div>
+    </ul> 
+    <AddTodoItem @addItem="addTodoItem" />   
+  </div>  
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import TodoItem from '../components/TodoItem.vue';
+import AddTodoItem from '../components/AddTodoItem.vue';
 
 export default {
   computed: {
@@ -21,7 +23,13 @@ export default {
     })
   },
   components: { 
-    TodoItem
+    TodoItem, AddTodoItem
+  },
+  methods:{
+    addTodoItem(obj){
+      this.add_item(obj);
+    },
+    ...mapActions(['add_item'])
   }
 }
 </script>

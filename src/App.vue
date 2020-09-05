@@ -2,19 +2,17 @@
   <div id="app">
     <NavBar />
     <router-view></router-view>
-    <AddTodoItem @addItem="addTodoItem" />
   </div>
 </template>
 
 <script>
 import NavBar from './components/NavBar.vue';
-import AddTodoItem from './components/AddTodoItem.vue';
 import { mapActions } from 'vuex';
 
 export default {
   name: 'App',
   components:{
-    NavBar, AddTodoItem
+    NavBar
   },
   methods:{
     addTodoItem(obj){
