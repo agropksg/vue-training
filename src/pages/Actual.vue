@@ -12,12 +12,16 @@
 
 <script>
 import TodoItem from '../components/TodoItem.vue';
+import { mapGetters } from 'vuex';
 
 export default {
   computed: {
-    items(){
-      return this.$store.getters.getTodoItemsByCompliteStatus(false)
-    }
+    compltedItems(){
+      this.items(false);
+    },
+    ...mapGetters({
+      itemsByStatus: 'getTodoItemsByCompliteStatus'
+    })
   },
   components:{
     TodoItem
