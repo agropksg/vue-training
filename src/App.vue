@@ -1,45 +1,38 @@
 <template>
   <div id="app">
-    <Todos :items = 'list' />
-    <AddTodoItem @add-func="addToList" />
+    <NavBar />
+    <router-view></router-view>
+    <AddTodoItem @addItem="addTodoItem" />
   </div>
 </template>
 
 <script>
-import Todos from './components/Todos';
-import AddTodoItem from './components/AddTodoItem';
-  export default {
-    name: 'app',
-    components:{
-      Todos, AddTodoItem
+import NavBar from './components/NavBar.vue';
+import AddTodoItem from './components/AddTodoItem.vue';
+import { mapActions } from 'vuex';
+
+export default {
+  name: 'App',
+  components:{
+    NavBar, AddTodoItem
+  },
+  methods:{
+    addTodoItem(obj){
+      this.add_item(obj)
     },
-    data(){
-      return {
-        list:[
-          {
-            id:2,
-            name:'Nashaniva',
-            status:false
-          },
-          {
-            id:4,
-            name:'tut.by',
-            status:false
-          },
-          {
-            id:3,
-            name:'Onliner.by',
-            status:true
-          }
-        ]
-      }
-    },
-    methods:{
-      addToList(obj){
-        this.list.push(obj);
-      }
-    }  
+    ...mapActions([
+      'add_item'
+      ])
   }
+}
 </script>
 
-<style></style>
+<style>
+  #app{
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .completed{
+    text-decoration: line-through;
+  }
+</style>
