@@ -12,10 +12,9 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import TodoItem from '../components/TodoItem.vue';
 import AddTodoItem from '../components/AddTodoItem.vue';
-import store from '../store.js'
 
 export default {
   computed: {
@@ -28,11 +27,9 @@ export default {
   },
   methods:{
     addTodoItem(obj){
-      store.dispatch({
-        type: 'add_item',
-        amount: obj
-      });
-    }
+      this.add_item(obj);
+    },
+    ...mapActions(['add_item'])
   }
 }
 </script>

@@ -32,10 +32,10 @@ const store = new Vuex.Store({
 
   mutations: {
     addItem(state,payload){
-      state.listToDo.push(payload.amount);
+      state.listToDo.push(payload);
     },
     changeItemStatus(state,payload){
-      let itemForChange = state.listToDo.find((item)=>payload.itemId === item.id)
+      let itemForChange = state.listToDo.find((item)=>payload === item.id)
       itemForChange.complite = !itemForChange.complite
     },
     uploadUniversities(state,payload){
@@ -67,7 +67,7 @@ const store = new Vuex.Store({
   },
 
   actions: {
-    add_item(context, payload){
+    add_item(context, payload){      
       context.commit('addItem', payload);
     },
     changeItemStatus(context,payload){

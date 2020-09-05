@@ -1,18 +1,27 @@
 <template>
   <div id="app">
     <NavBar />
-    <router-view></router-view>    
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import NavBar from './components/NavBar.vue';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'App',
   components:{
     NavBar
   },
+  methods:{
+    addTodoItem(obj){
+      this.add_item(obj)
+    },
+    ...mapActions([
+      'add_item'
+      ])
+  }
 }
 </script>
 
